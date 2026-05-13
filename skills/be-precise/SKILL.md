@@ -1,0 +1,75 @@
+---
+name: be-precise
+description: Use when transitioning from a plan, design doc, or spec into implementation - optimize for accuracy over speed and cost; ask the user when confused, when the spec is ambiguous, or when tempted by a hack rather than guessing or working around it
+---
+
+# Be Precise
+
+## Overview
+
+When moving from plan/spec to implementation, **accuracy is the priority**. Speed and cost are secondary. The goal is not autonomous completion — it is correct execution of the specification.
+
+The user is available continuously. Use them.
+
+## Core Rules
+
+1. **Optimize for accuracy.** Not speed. Not token cost. Not "ship it." If a slower or more expensive path produces a more correct result, take it.
+
+2. **Ask when confused.** If the spec is unclear, contradicts itself, or doesn't cover a real case you've hit during implementation — stop and ask. The user is reachable. They prefer a question over a guess.
+
+3. **Ask when tempted by a hack.** If you find yourself wanting to do something the spec doesn't sanction — a workaround, a shortcut, a "good enough" deviation — that is the signal to ask, not to proceed. Hacks compound. One question prevents many corrections.
+
+4. **The plan is the source of truth, not your judgment.** Specifications can be imprecise; that's expected. The right response to imprecision is to surface it to the user, not to silently resolve it.
+
+5. **Autonomy is not the goal.** Quality is. A correct outcome with several clarification rounds beats a wrong outcome delivered without questions.
+
+## When to Ask vs Proceed
+
+| Situation | Action |
+|-----------|--------|
+| Spec covers the case directly | Proceed |
+| Spec is silent on a case you've hit | Ask |
+| Spec contradicts itself | Ask |
+| You see a "cleaner" deviation from the spec | Ask before deviating |
+| You're about to add an exception, fallback, or special case the spec doesn't mention | Ask |
+| You're about to comment "TODO: handle X properly later" | Ask now |
+| Tests need to be weakened or skipped to make code pass | Ask — likely a real problem |
+| Type system or framework constraint forces a workaround | Ask — verify the workaround is acceptable |
+| You feel "this is probably fine" without certainty | Ask |
+
+## Red Flags — Stop and Ask
+
+These thoughts indicate you should pause and ask the user:
+
+- "I'll just do X for now and revisit later."
+- "The spec doesn't say but probably means..."
+- "This edge case isn't in the plan, I'll handle it by..."
+- "I'll suppress this warning / disable this check to move forward."
+- "It would be cleaner if I also changed Y while I'm here." (scope creep)
+- "I can work around this by..."
+- "Close enough to what the spec says."
+
+Each of these is a question, not a decision.
+
+## How to Ask Well
+
+When you ask, give the user enough to decide quickly:
+
+- **Where you are** in the plan (which step / section)
+- **What the spec says** verbatim, if relevant
+- **What you found** that doesn't fit
+- **The options** you see, with trade-offs
+- **Your recommendation**, if you have one
+
+Don't ask open-ended "what should I do?" — propose, then ask for confirmation or redirection.
+
+## Common Mistakes
+
+- **Silent resolution of ambiguity.** You picked one interpretation without flagging it. Even if you guessed right, the user didn't see the decision and can't course-correct.
+- **Batching questions for "later."** By the time you ask, you've already implemented around assumptions. Ask at the point of doubt, not at the end.
+- **Treating questions as failure.** A clarification is a normal part of accurate implementation. The user explicitly wants them.
+- **Asking trivial questions.** If the spec or code answers it, read first. Asking is for genuine ambiguity, not for things you can verify yourself.
+
+## Boundary with Other Skills
+
+This skill governs the implementation *attitude*. Process skills (TDD, debugging, verification) still apply — `be-precise` does not override them. It complements them: when those skills hit a judgment call the spec doesn't resolve, ask.
