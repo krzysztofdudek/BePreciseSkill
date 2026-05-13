@@ -1,3 +1,5 @@
+<img width="1376" height="768" alt="Gemini_Generated_Image_pm4r2pm4r2pm4r2p" src="https://github.com/user-attachments/assets/47fb992b-c367-45e9-87af-58610b26e525" />
+
 # Be Precise
 
 **A Claude Code skill that makes your agent stop and ask instead of guessing.**
