@@ -2,10 +2,6 @@
 
 **A Claude Code skill that makes your agent stop and ask instead of guessing.**
 
-[![Latest Release](https://img.shields.io/github/v/release/krzysztofdudek/BePreciseSkill)](https://github.com/krzysztofdudek/BePreciseSkill/releases/latest)
-[![License](https://img.shields.io/github/license/krzysztofdudek/BePreciseSkill)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/krzysztofdudek/BePreciseSkill)](https://github.com/krzysztofdudek/BePreciseSkill/stargazers)
-
 Plans are imprecise. Specs have gaps. The default agent fills those gaps from training data and ships. This skill changes the default: when the spec is silent on a hit case, contradicts itself, or tempts a workaround, the agent stops and asks.
 
 The cost is more clarification rounds. The win is fewer wrong outcomes delivered confidently.
@@ -86,6 +82,10 @@ MIT
 
 **[Researcher Skill](https://github.com/krzysztofdudek/ResearcherSkill)** — once the agent knows what you actually want, point it at a measurable goal and let it iterate overnight. Same author, complementary skill.
 
-**[AutoReview](https://github.com/krzysztofdudek/AutoReview)** — per-file architecture gates verified on every commit. Markdown rules as enforcement, not suggestions.
+**[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil)** — architecture rules in Markdown your agent can't ignore. A reviewer verifies every change and feeds violations back into the agent's loop before it moves on. Where be-precise asks *before*, Yggdrasil enforces *after*.
 
-**[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil)** — continuous code review for AI-assisted development.
+---
+
+<div align="center">
+  <img src="yggdrasil.svg" alt="Yggdrasil" width="150" />
+</div>
