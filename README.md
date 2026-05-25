@@ -82,6 +82,8 @@ MIT
 
 ## See also
 
+**[Liaison](https://github.com/krzysztofdudek/LiaisonSkill)** — for requests phrased in business or product terms (not a precise spec). A five-phase protocol reads back intent in the user's language, holds consent gates for destructive operations, delivers exactly what was confirmed, and closes with user-executable verification steps. Liaison handles the human ↔ intent gap; be-precise handles the intent ↔ code gap.
+
 **[Researcher Skill](https://github.com/krzysztofdudek/ResearcherSkill)** — once the agent knows what you actually want, point it at a measurable goal and let it iterate overnight. Same author, complementary skill.
 
 **[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil)** — architecture rules in Markdown your agent can't ignore. A reviewer verifies every change and feeds violations back into the agent's loop before it moves on. Where be-precise asks *before*, Yggdrasil enforces *after*.
