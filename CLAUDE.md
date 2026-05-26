@@ -6,7 +6,7 @@ This repository exists solely so the author can develop and version the be-preci
 
 ## Plugin scaffolding
 
-This repo is installable as a Claude Code plugin. Layout mirrors the convention used by sibling repos (e.g. ResearcherSkill, AutoReview):
+This repo is installable as a Claude Code plugin. Layout:
 - `.claude-plugin/plugin.json` — plugin manifest (name, version, description, keywords). `version` here MUST match the latest released version in `CHANGELOG.md` and is bumped together with it.
 - `.claude-plugin/marketplace.json` — single-plugin marketplace listing so the repo can be added via `/plugin install be-precise@be-precise-marketplace`.
 - `skills/be-precise/SKILL.md` — the canonical skill body. Editing this file IS editing the skill.

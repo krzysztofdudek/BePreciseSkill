@@ -1,4 +1,2 @@
-.DS_Store
-*.log
-.idea/
-.vscode/
+.lab/
+run.log
