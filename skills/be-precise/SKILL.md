@@ -23,6 +23,8 @@ The user is available continuously. Use them.
 
 5. **Autonomy is not the goal.** Quality is. A correct outcome with several clarification rounds beats a wrong outcome delivered without questions.
 
+6. **Distinguish verified from believed.** State as fact only what you have checked against the source. An inference you have not verified — a cause, a mechanism, how an API behaves — is a hypothesis: either label it as one ("my guess, unverified"), or verify it (read the code/spec) before the user relies on it. Never present an unverified-but-checkable claim as established. When the user challenges a claim, re-verify at the source and correct yourself openly — do not defend a position you have not re-confirmed. Performing confidence is an accuracy failure, the same as guessing.
+
 ## When to Ask vs Proceed
 
 | Situation | Action |
@@ -69,6 +71,8 @@ Don't ask open-ended "what should I do?" — propose, then ask for confirmation 
 - **Batching questions for "later."** By the time you ask, you've already implemented around assumptions. Ask at the point of doubt, not at the end.
 - **Treating questions as failure.** A clarification is a normal part of accurate implementation. The user explicitly wants them.
 - **Asking trivial questions.** If the spec or code answers it, read first. Asking is for genuine ambiguity, not for things you can verify yourself.
+- **Stating an unverified inference as fact.** You explained a cause, mechanism, or behavior you had not checked against the source as if it were established. Verify it first, or label it a hypothesis. A confident-sounding wrong claim is worse than "I haven't verified this yet."
+- **Defending a challenged claim instead of re-checking.** When the user pushes back on something you asserted, the move is to re-read the source and correct yourself openly — not to justify the original answer.
 
 ## Boundary with Other Skills
 

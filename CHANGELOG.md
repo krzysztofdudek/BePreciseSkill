@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-05-30
+
+### Added
+- New Core Rule **"Distinguish verified from believed"** (`skills/be-precise/SKILL.md`). Closes the gap where a checkable-but-unverified inference (a cause, a mechanism, how an API behaves) gets stated as fact: state as fact only what you checked against the source, label or verify everything else, and when challenged re-verify at the source rather than defend an unconfirmed position.
+- Two **Common Mistakes** entries mirroring the rule as failure modes: "Stating an unverified inference as fact" and "Defending a challenged claim instead of re-checking".
+
 ## [0.1.0] - 2026-05-13
 
 ### Added
@@ -14,5 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Claude Code plugin scaffolding: `.claude-plugin/plugin.json` (manifest) and `.claude-plugin/marketplace.json` (single-plugin marketplace listing). Installable via `/plugin marketplace add krzysztofdudek/BePreciseSkill` then `/plugin install be-precise@be-precise-marketplace`. Single-file drop-in works for any agent that reads markdown skills.
 - MIT license, README, CLAUDE.md with versioning workflow.
 
-[Unreleased]: https://github.com/krzysztofdudek/BePreciseSkill/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/krzysztofdudek/BePreciseSkill/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/krzysztofdudek/BePreciseSkill/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/krzysztofdudek/BePreciseSkill/releases/tag/v0.1.0
