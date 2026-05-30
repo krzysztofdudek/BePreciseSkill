@@ -1,92 +1,153 @@
-<img width="1376" height="768" alt="Gemini_Generated_Image_pm4r2pm4r2pm4r2p" src="https://github.com/user-attachments/assets/47fb992b-c367-45e9-87af-58610b26e525" />
+<img width="1376" height="768" alt="Urd — the well at the root of the tree: your AI coding agent consults the source of truth and asks instead of guessing when the spec runs out" src="https://github.com/user-attachments/assets/47fb992b-c367-45e9-87af-58610b26e525" />
 
-# Be Precise
+# Urd
 
-**A Claude Code skill that makes your agent stop and ask instead of guessing.**
+**Your AI agent hit a gap in the spec — so it guessed, and shipped.** Urd makes it stop and ask instead.
 
-Plans are imprecise. Specs have gaps. The default agent fills those gaps from training data and ships. This skill changes the default: when the spec is silent on a hit case, contradicts itself, or tempts a workaround, the agent stops and asks.
+The moment the agent moves from a plan into code and the plan runs out, Urd makes it **consult the source of truth or ask you** — instead of inventing an answer and burying the decision in the diff.
 
-The cost is more clarification rounds. The win is fewer wrong outcomes delivered confidently.
+```
+/plugin marketplace add krzysztofdudek/UrdSkill
+/plugin install urd@urd-marketplace
+```
+
+Run both, then `/reload-plugins` to activate it in this session (or restart Claude Code). No config, no API key. The skill activates on its own the moment the agent moves from a plan, design doc, or spec into implementation.
+
+> MIT licensed · single markdown file · works with any agent that reads skills · part of the [Yggdrasil family](#the-yggdrasil-family) · [full skill body](skills/urd/SKILL.md)
+
+---
+
+## See it
+
+**Step 4 of the plan: implement the retry logic.** The plan says, verbatim:
+
+> *"On 5xx response, retry up to 3 times with exponential backoff."*
+
+Mid-implementation the agent hits a **429 (rate-limited)** — not a 5xx, but retryable. The spec is silent on it. The default agent picks something and moves on. Urd makes it stop:
+
+> **Question — retry logic, step 4.** The plan covers 5xx, but I've hit **429 (rate-limited)**: not 5xx, yet retryable. The spec doesn't say how to treat it. Three options:
+>
+> 1. Treat 429 like 5xx — retry with backoff.
+> 2. Honor the `Retry-After` header if present, otherwise back off.
+> 3. Leave 429 to the caller — don't retry it here.
+>
+> I'd go with (2). Proceed?
+
+**Note what it did:** it didn't resolve the ambiguity silently. Ten seconds on a decision now, instead of finding it in the diff an hour later. That's the whole skill — at the moment of doubt, ask, don't guess.
+
+---
+
+## When it fires
+
+The skill activates the moment the agent moves from a plan/spec into implementation. Once active, it pushes toward asking rather than guessing whenever:
+
+- the spec is **silent** on a case the agent hit
+- the spec **contradicts itself**
+- the agent is about to add a **fallback, exception, or `TODO`** the spec didn't sanction
+- a **test would have to be weakened or skipped** to make the code pass
+- a **framework or type-system constraint** is forcing a workaround
+- the agent catches itself thinking *"this is probably fine"* without certainty
+
+Well-written plans trigger few stops. Sparse plans trigger many. That's the point.
+
+---
+
+## How it asks
+
+When Urd asks, it gives you enough to decide in seconds — never an open-ended *"what should I do?"*:
+
+| It tells you | Example |
+|---|---|
+| **Where it is** in the plan | "Step 4, retry logic" |
+| **What the spec says**, verbatim | "On 5xx, retry 3× with backoff" |
+| **What it found** that doesn't fit | "hit a 429, not covered" |
+| **The options**, with trade-offs | the numbered list above |
+| **Its recommendation** | "I'd go with (2)" |
+
+It also **distinguishes verified from believed**: it states as fact only what it has checked against the source. An unverified inference — a cause, a mechanism, how an API behaves — it labels as a guess or verifies before you rely on it. Challenge a claim and it re-reads the source and corrects itself, instead of defending an answer it never confirmed.
+
+---
 
 ## Install
 
 ### Claude Code plugin (recommended)
 
-Two slash commands inside Claude Code — first registers this repo as a marketplace, second installs the plugin from it:
+Two slash commands. The first registers this repo as a marketplace; the second installs the plugin from it.
 
 ```
-/plugin marketplace add krzysztofdudek/BePreciseSkill
-/plugin install be-precise@be-precise-marketplace
+/plugin marketplace add krzysztofdudek/UrdSkill
+/plugin install urd@urd-marketplace
 ```
 
-Restart Claude Code (or run `/plugin reload`). The skill activates automatically when the agent transitions from a plan or spec into implementation.
+Then run `/reload-plugins` to activate it in the current session (or restart Claude Code). No config, no API key.
 
-To upgrade later: `/plugin marketplace update be-precise-marketplace` then `/plugin install be-precise@be-precise-marketplace` again.
+To upgrade later, refresh the marketplace and reinstall:
+
+```
+/plugin marketplace update urd-marketplace
+/plugin install urd@urd-marketplace
+```
 
 ### Single-file drop-in (any agent)
 
-The canonical skill body is `skills/be-precise/SKILL.md` in this repo (one file, frontmatter-tagged). Copy it into your agent's skill directory:
+The whole skill is one frontmatter-tagged markdown file: [`skills/urd/SKILL.md`](skills/urd/SKILL.md). Copy it into your agent's skill directory.
 
-- **Claude Code (user-level):** `~/.claude/skills/be-precise/SKILL.md`
-- **Claude Code (project-level):** `.claude/skills/be-precise/SKILL.md` in your repo
-- **Codex / Cursor / other agents:** wherever your tool reads skills or instructions from
+- **Claude Code, user-level:** `~/.claude/skills/urd/SKILL.md`
+- **Claude Code, project-level:** `.claude/skills/urd/SKILL.md` in your repo
+- **Other agents:** wherever your tool reads markdown skills
 
-## What it looks like running
+Nothing else in this repo affects behavior — all of it lives in that one file.
 
-> **Step 4 of plan: implement the retry logic.**
->
-> The plan says: *"On 5xx response, retry up to 3 times with exponential backoff."*
->
-> Question: how should I handle 429 (rate-limited)? It's not 5xx but it's a retryable case. Three options:
-> 1. Treat 429 like 5xx — retry with backoff.
-> 2. Use the `Retry-After` header if present, otherwise backoff.
-> 3. Skip 429 from retry logic — leave it to the caller.
->
-> I'd go with (2). Want me to proceed?
+---
 
-That's the kind of interruption you want. Spec doesn't cover 429, agent doesn't guess, you spend ten seconds on a decision instead of finding it in the diff an hour later.
+## What it doesn't claim
 
-## When it fires
+Urd is a skill that biases the agent toward asking — not a runtime guarantee it will always stop. It does not eliminate bugs, and it does not fix a vague spec for you: it surfaces the gaps so *you* can. If what you want is a fast pass with deviations resolved silently, this is deliberately the wrong tool — it trades clarification rounds for fewer wrong outcomes delivered confidently.
 
-The skill activates the moment the agent moves from a plan, design doc, or spec into implementation. Once active, it pushes toward asking rather than guessing whenever:
-
-- the spec is silent on a case the agent hit
-- the spec contradicts itself
-- the agent is about to add a fallback, exception, or TODO the spec didn't sanction
-- the agent feels "this is probably fine" without certainty
-- a test needs to be weakened or skipped to make code pass
-- a framework or type system constraint forces a workaround
-
-Full table in [`skills/be-precise/SKILL.md`](skills/be-precise/SKILL.md).
-
-## Why this exists
-
-Agents default to autonomous completion. Faced with a gap in the spec, they pick something. Faced with ambiguity, they resolve it silently. By the time you read the output, the decisions are already made and buried in the diff.
-
-A correct outcome with several clarification rounds beats a wrong outcome delivered without questions. The user is reachable. The plan is the source of truth, not the agent's judgment.
+---
 
 ## FAQ
 
-**Won't this make the agent constantly stop?**
-Only when the spec doesn't cover the case. The skill includes an explicit table — if the spec answers the question, proceed; if it doesn't, ask. Most well-written plans don't trigger many stops. Sparse plans trigger many. That's the point.
+<details>
+<summary><b>Won't this make the agent constantly stop?</b></summary>
 
-**Does this conflict with TDD / debugging / verification skills?**
-No. This governs the *attitude* when moving from spec to code, not the process. TDD still tells you to write the test first; this tells you to ask when the test you'd write isn't covered by the spec.
+Only when the spec doesn't cover the case. The skill carries an explicit ask-vs-proceed table — if the spec answers the question, it proceeds; if it doesn't, it asks. Most well-written plans don't trigger many stops. Sparse plans do — and that's the signal you wanted.
+</details>
 
-**What if I'd rather the agent just ship something?**
-Then don't install this skill. It's deliberately the opposite of "ship something." If you want a fast pass with deviations resolved silently, this skill is the wrong tool.
+<details>
+<summary><b>Does it conflict with TDD, debugging, or verification skills?</b></summary>
+
+No — it composes. It governs the *attitude* moving from spec to code, not the process. TDD still says write the test first; Urd says ask when the test you'd write isn't covered by the spec.
+</details>
+
+<details>
+<summary><b>What if I'd rather the agent just ship something?</b></summary>
+
+Then don't install it. It's deliberately the opposite of "ship something." A correct outcome after a few clarification rounds beats a wrong outcome delivered without questions — but if you want the fast pass, this is the wrong tool.
+</details>
+
+<details>
+<summary><b>Why "Urd"?</b></summary>
+
+Urð is the Norn who keeps the well at the root of Yggdrasil — the source of truth consulted before acting. The skill plays the same role for your codebase: the plan is the source of truth, not the agent's judgment. It's part of the [Yggdrasil family](#the-yggdrasil-family).
+</details>
+
+---
+
+## The Yggdrasil family
+
+Four tools, one thesis: **make an AI coding agent prove correctness, stage by stage** — because "done" isn't done. Each is a checkpoint at a different point in the pipeline, where the agent has to show its work before it continues.
+
+| Tool | Stage | What it makes the agent prove |
+|---|---|---|
+| **[Ratatoskr](https://github.com/krzysztofdudek/RatatoskrSkill)** | request → intent | Reads your request back in plain words and waits for an explicit yes before it acts. |
+| **Urd** (this one) | intent → code | When the spec is ambiguous, it consults the source of truth and asks — it doesn't guess. |
+| **[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil)** | code → architecture | Every change satisfies the rules that govern it, checked before the agent moves on. |
+| **[Researcher](https://github.com/krzysztofdudek/ResearcherSkill)** | code → measured result | Point it at a metric and it runs experiments — hypotheses kept and discarded. |
 
 ## License
 
-MIT
-
-## See also
-
-**[Liaison](https://github.com/krzysztofdudek/LiaisonSkill).** For people who don't write code but use AI agents anyway. Reads back intent in plain language and holds consent gates before destructive operations. Liaison covers the user-to-intent gap. Be-precise covers the intent-to-code gap.
-
-**[Researcher Skill](https://github.com/krzysztofdudek/ResearcherSkill).** Once you know what should improve and how to measure it, point the agent at the metric and let it iterate.
-
-**[Yggdrasil](https://github.com/krzysztofdudek/Yggdrasil).** Architecture rules and AST checks your agent can't ignore. A reviewer verifies every change before the agent moves on. Be-precise asks before. Yggdrasil enforces after.
+MIT © [Krzysztof Dudek](https://github.com/krzysztofdudek)
 
 ---
 

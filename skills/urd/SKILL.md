@@ -1,9 +1,9 @@
 ---
-name: be-precise
+name: urd
 description: Use when transitioning from a plan, design doc, or spec into implementation - optimize for accuracy over speed and cost; ask the user when confused, when the spec is ambiguous, or when tempted by a hack rather than guessing or working around it
 ---
 
-# Be Precise
+# Urd
 
 ## Overview
 
@@ -76,4 +76,4 @@ Don't ask open-ended "what should I do?" — propose, then ask for confirmation 
 
 ## Boundary with Other Skills
 
-This skill governs the implementation *attitude*. Process skills (TDD, debugging, verification) still apply — `be-precise` does not override them. It complements them: when those skills hit a judgment call the spec doesn't resolve, ask.
+This skill governs the implementation *attitude*. Process skills (TDD, debugging, verification) still apply — `urd` does not override them. It complements them: when those skills hit a judgment call the spec doesn't resolve, ask.

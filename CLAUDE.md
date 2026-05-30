@@ -1,15 +1,17 @@
-# BePreciseSkill
+# UrdSkill
 
 ## Purpose
 
-This repository exists solely so the author can develop and version the be-precise skill. The canonical file is `skills/be-precise/SKILL.md` — people install it as a Claude Code plugin (or copy that one file into their agent's skill dir). Nothing in this repo (CLAUDE.md, CHANGELOG.md, README.md, CI, etc.) may affect the skill's mechanics. All behavior must be self-contained in `skills/be-precise/SKILL.md`.
+This repository exists solely so the author can develop and version the urd skill. The canonical file is `skills/urd/SKILL.md` — people install it as a Claude Code plugin (or copy that one file into their agent's skill dir). Nothing in this repo (CLAUDE.md, CHANGELOG.md, README.md, CI, etc.) may affect the skill's mechanics. All behavior must be self-contained in `skills/urd/SKILL.md`.
+
+Urd (formerly "BePrecise") is part of the Yggdrasil family of AI-coding-agent correctness tools: it owns the **intent → code** stage — when the agent moves from a plan/spec into implementation, it consults the source of truth and asks instead of guessing. Siblings: Ratatoskr (user → intent), Yggdrasil (architecture), Researcher.
 
 ## Plugin scaffolding
 
 This repo is installable as a Claude Code plugin. Layout:
 - `.claude-plugin/plugin.json` — plugin manifest (name, version, description, keywords). `version` here MUST match the latest released version in `CHANGELOG.md` and is bumped together with it.
-- `.claude-plugin/marketplace.json` — single-plugin marketplace listing so the repo can be added via `/plugin install be-precise@be-precise-marketplace`.
-- `skills/be-precise/SKILL.md` — the canonical skill body. Editing this file IS editing the skill.
+- `.claude-plugin/marketplace.json` — single-plugin marketplace listing so the repo can be added via `/plugin install urd@urd-marketplace`.
+- `skills/urd/SKILL.md` — the canonical skill body. Editing this file IS editing the skill.
 
 When bumping version, update `.claude-plugin/plugin.json` `version` in lockstep with the CHANGELOG section header.
 
