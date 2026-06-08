@@ -88,6 +88,39 @@ To upgrade later, refresh the marketplace and reinstall:
 /plugin install urd@urd-marketplace
 ```
 
+### GitHub Copilot CLI plugin
+
+The same repo is also a [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli) marketplace. Register it, then install the plugin:
+
+```
+copilot plugin marketplace add krzysztofdudek/UrdSkill
+copilot plugin install urd@urd-marketplace
+```
+
+To upgrade later: `copilot plugin update urd`. The same skill body powers both Claude Code and Copilot — nothing changes in how it behaves.
+
+### Codex CLI plugin
+
+Codex reads the same skill. Register this repo as a marketplace, then install:
+
+```
+codex plugin marketplace add krzysztofdudek/UrdSkill
+codex plugin install urd@urd-marketplace
+```
+
+To upgrade later: `codex plugin marketplace upgrade urd-marketplace`. Or drop the single file into `~/.agents/skills/urd/SKILL.md` (user-level) or `.agents/skills/urd/SKILL.md` (project-level).
+
+### Cursor plugin
+
+Cursor auto-discovers the skill from the plugin manifest at the repo root. Install it locally:
+
+```
+git clone https://github.com/krzysztofdudek/UrdSkill.git
+ln -s "$(pwd)/UrdSkill" ~/.cursor/plugins/local/urd
+```
+
+Then reload Cursor (**Developer: Reload Window**). Or drop the single file into `~/.cursor/skills/urd/SKILL.md` (user-level) or `.cursor/skills/urd/SKILL.md` (project-level).
+
 ### Single-file drop-in (any agent)
 
 The whole skill is one frontmatter-tagged markdown file: [`skills/urd/SKILL.md`](skills/urd/SKILL.md). Copy it into your agent's skill directory.
