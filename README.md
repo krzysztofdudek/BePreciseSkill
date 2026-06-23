@@ -2,7 +2,7 @@
 
 # Urd
 
-**Your AI agent hit a gap in the spec — so it guessed, and shipped.** Urd makes it stop and ask instead.
+**Your AI agent hit a gap in the spec, so it guessed, and shipped.** Urd makes it stop and ask instead.
 
 The moment the agent moves from a plan into code and the plan runs out, Urd makes it **consult the source of truth or ask you** — instead of inventing an answer and burying the decision in the diff.
 
