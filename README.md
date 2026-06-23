@@ -169,7 +169,7 @@ Urð is the Norn who keeps the well at the root of Yggdrasil — the source of t
 
 ## The Yggdrasil family
 
-Four tools, one thesis: **make an AI coding agent prove correctness, stage by stage** — because "done" isn't done. Each is a checkpoint at a different point in the pipeline, where the agent has to show its work before it continues.
+Four tools, one thesis: **make an AI coding agent prove correctness, stage by stage.** Because "done" isn't done. Each is a checkpoint at a different point in the pipeline, where the agent has to show its work before it continues.
 
 | Tool | Stage | What it makes the agent prove |
 |---|---|---|
